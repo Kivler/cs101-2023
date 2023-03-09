@@ -14,7 +14,7 @@ int main(){
         printf("File write error...\n");
     }
     fseek(fb, 0 , SEEK_SET);
-    if(fwrite(c),sizeof(c), 1, fp)!=1){
+    if(fwrite(a),sizeof(a), 1, fp)!=1){
         printf("File write error...\n");
     }
     
