@@ -1,33 +1,22 @@
 #include <stdio.h>
 
-int multi (int i, int j)
+void print_table(int i, int j)
 {
-    if (i==1)
-    {
-        if (j==1)
-        {
-            printf("%d*%d=%-2d\n", i, j, i*j);
-        }
-        else
-        {
-            printf("%d*%d=%-2d\n", i, j-1, i*(j-1));
-        }
+    if (i > 9) {
+        return;
     }
-    else
-    {
-        if (j==1)
-        {
-            printf("%d*%d=%-2d\n", i, j, i*j);
-        }
-        else
-        {
-            printf("%d*%d=%-2d\n", i, j-1, i*(j-1));
-        }
+    if (j > 9) {
+        printf("\n");
+        print_table(i+1, 1);
+        return;
     }
+    printf("%2d*%2d=%3d\t", i, j, i*j);
+    print_table(i, j+1);
 }
 
 int main()
 {
-    multi(9, 9);
+    
+    print_table(1, 1);
     return 0;
 }
