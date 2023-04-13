@@ -10,7 +10,7 @@ void print_table(int i, int j)
         print_table(i+1, 1);
         return;
     }
-    printf("%2d*%2d=%3d\t", i, j, i*j);
+    printf("%d*%d=%d\t", i, j, i*j);
     print_table(i, j+1);
 }
 
