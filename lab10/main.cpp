@@ -1,71 +1,44 @@
 #include <iostream>
-#include <fstream>
 #include <string>
-#include <vector>
-
+#include <fstream>
 using namespace std;
 
-class ReadClass {
-public:
-    void showClass() {
-        string filename = "main.cpp";
-        int numClasses = countClasses(filename);
-        vector<string> classNames = getClassNames(filename);
-
-        cout << numClasses << " class in " << filename << endl;
-        for (const string& className : classNames) {
-            cout << "class " << className << endl;
-        }
-    }
-
-private:
-    int countClasses(const string& filename) {
-        ifstream file(filename);
-        string line;
-        int count = 0;
-
-        while (getline(file, line)) {
-            if (isClassDeclaration(line)) {
-                count++;
-            }
-        }
-
-        file.close();
-        return count;
-    }
-
-    vector<string> getClassNames(const string& filename) {
-        vector<string> classNames;
-        ifstream file(filename);
-        string line;
-
-        while (getline(file, line)) {
-            if (isClassDeclaration(line)) {
-                string className = extractClassName(line);
-                classNames.push_back(className);
-            }
-        }
-
-        file.close();
-        return classNames;
-    }
-
-    bool isClassDeclaration(const string& line) {
-        
-        return (line.find("class") != string::npos) && (line.find_first_not_of(" \t{") == line.find("class"));
-    }
-
-    string extractClassName(const string& line) {
-     
-        string className;
-        size_t startPos = line.find("class") + 6;   
-        size_t endPos = line.find(" ", startPos);  
-        className = line.substr(startPos, endPos - startPos);
-        return className;
+class myString
+{
+    private:
+    string m_str;
+    public:
+    myString(string s){
+        m_str=s;
     }
 };
 
-int main() {
+class ReadClass
+{
+    public:
+    void showClass(){
+        int n=0;
+        ifstream in;
+        string line,str("class");
+        in.open("main.cpp");
+        if(in.fail()){
+            cout<<"Erro to open file."<<endl;
+        }
+        while (getline(in, line)) {
+            if (line.find(str) != string::npos){
+                const char* characters = line.c_str();
+                if(characters[0]=='c'){
+                    cout << characters << endl;
+                    n++;
+                }
+            }
+        }
+        cout<<n<<" class in main.cpp"<<endl;
+    }
+};
+
+int main()
+{
     ReadClass rfile;
     rfile.showClass();
     return 0;
